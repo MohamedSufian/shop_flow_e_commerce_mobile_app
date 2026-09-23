@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// Each signed-in user can only read and write their own data:
+//   users/{uid}                 → profile, cart, favorites, addresses
+//   users/{uid}/orders/{orderId} → orders
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+
+      match /{subcollection=**} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+  }
+}
