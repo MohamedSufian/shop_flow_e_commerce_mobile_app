@@ -50,3 +50,6 @@ app.*.map.json
 # Local tool output copies (not part of the app)
 /Claude outputs/
 pubspec-*.yaml
+
+# Raw screenshots (optimized copies live in docs/screenshots)
+/screenshots/
